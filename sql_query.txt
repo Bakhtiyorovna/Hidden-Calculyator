@@ -1,0 +1,54 @@
+DROP TABLE users,images, vedios, other_files, messages;
+SELECT * FROM users;
+SELECT * FROM images;
+SELECT * FROM vedios;
+SELECT * FROM other_files;
+SELECT * FROM messages;
+
+CREATE TABLE users(
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	Firs_name VARCHAR(50),
+	Last_name VARCHAR(50),
+	user_name VARCHAR(50) NOT NULL UNIQUE,
+	birth_day DATE,
+	email VARCHAR(50) NOT NULL UNIQUE,
+	pssword VARCHAR(4),
+	description TEXT,
+	created_at TIME WITHOUT TIME ZONE NOT NULL,
+	updatet_at TIME WITHOUT TIME ZONE
+);
+
+CREATE TABLE images(
+	id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	image BYTEA NOT NULL ,
+	user_id BIGINT REFERENCES users(id),
+	created_at TIME WITHOUT TIME ZONE NOT NULL,
+	updatet_at TIME WITHOUT TIME ZONE);
+	
+CREATE TABLE vedios(
+	id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	vedio BYTEA NOT NULL,
+	user_id BIGINT REFERENCES users(id),
+	description TEXT,
+	created_at TIME WITHOUT TIME ZONE NOT NULL,
+	updatet_at TIME WITHOUT TIME ZONE);
+	
+CREATE TABLE other_files(
+	id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	file BYTEA NOT NULL,
+	user_id BIGINT REFERENCES users(id),
+	description TEXT,
+	created_at TIME WITHOUT TIME ZONE NOT NULL,
+	updatet_at TIME WITHOUT TIME ZONE);
+	
+CREATE TABLE messages(
+	id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	"message" TEXT NOT NULL,
+	user_id BIGINT REFERENCES users(id),
+	description TEXT,
+	created_at TIME WITHOUT TIME ZONE NOT NULL,
+	updatet_at TIME WITHOUT TIME ZONE);
+	
+	
+	
+	
